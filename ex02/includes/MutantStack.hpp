@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Mutants.hpp                                        :+:      :+:    :+:   */
+/*   MutantStack.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,30 +16,34 @@
 #include <stack>
 #include <list>
 
-template <typename T>
+template < typename T >
 
-class Mutants : public std::stack<T> {
+// The goal of this exercise is to create a custom stack (MutantStack) that behaves 
+// like std::stack, but with iterators.
+// Normally, std::stack does not support iteration because it is designed as a Last-In-First-Out (LIFO) 
+// structure without direct element access except top().
+
+class MutantStack : public std::stack<T> { // We need to: Inherit from std::stack<T> to extend its functionality.
 
     public:
 
         typedef typename std::stack<T>::container_type::iterator iterator;
         typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
-        Mutants() {};
-
-        ~Mutants() {};
-
-        Mutants( const Mutants& rhs ) { *this = rhs; }
-
-        Mutants& operator=(const Mutants& rhs) {
-
+        MutantStack() {};
+        MutantStack( const MutantStack& rhs ) { *this = rhs; }
+        MutantStack& operator=(const MutantStack& rhs) {
             if (this != &rhs) {
                 std::stack<T>::operator=(rhs);
             }
-
-            return *this;
+            return (*this);
         }
+        ~MutantStack() {};
 
+// Add iterators to allow traversal of elements like a normal sequence container.
+// std::stack<T> itself does not provide iterators, but it is internally based on std::deque<T>.
+// We can expose begin() and end() using c (the internal container of std::stack).
+   
         iterator begin() { 
             return this->c.begin(); 
         }

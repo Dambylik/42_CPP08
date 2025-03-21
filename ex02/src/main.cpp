@@ -6,41 +6,47 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:42:08 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/18 19:24:55 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:34:01 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Mutants.hpp"
+#include "MutantStack.hpp"
+
+
+// Ensure all standard stack functions work correctly (e.g., push(), pop(), size()).
+// Verify that it behaves like std::list (by comparing outputs).
 
 int main() {
 
     {
-        Mutants<int> mstack;
+        MutantStack<int> mstack; // We create a MutantStack<int> object.
 
-        mstack.push(5);
+        mstack.push(5); // Push 5 and 17 onto the stack.
         mstack.push(17);
-        std::cout << mstack.top() << std::endl;
+        
+        std::cout << mstack.top() << std::endl; // Prints 17 (the most recently added element).
 
-        mstack.pop();
-        std::cout << mstack.size() << std::endl;
+        mstack.pop(); // Removes 17 from the stack.
+        
+        std::cout << mstack.size() << std::endl; // Now, only 5 remains, so size is 1.
 
         mstack.push(3);
         mstack.push(5);
         mstack.push(737);
         mstack.push(0);
 
-        Mutants<int>::iterator it = mstack.begin();
-        Mutants<int>::iterator ite = mstack.end();
+        MutantStack<int>::iterator it = mstack.begin();
+        MutantStack<int>::iterator ite = mstack.end();
 
         ++it;
         --it;
 
-        while (it != ite) {
+        while (it != ite) { // terates through the stack like a list and prints each element.
 			std::cout << *it << std::endl;
 			++it;
         }
 
-        std::stack<int> s(mstack);   
+        std::stack<int> s(mstack); // This copies mstack into a standard std::stack<int>, confirming that MutantStack behaves exactly like a std::stack.   
     }
 
     //for list :
@@ -78,6 +84,5 @@ int main() {
     }
 
     return 0;
-
-    
+   
 }

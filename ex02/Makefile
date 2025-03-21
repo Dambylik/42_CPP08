@@ -6,12 +6,12 @@
 #    By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 17:02:11 by okapshai          #+#    #+#              #
-#    Updated: 2025/03/18 19:25:25 by okapshai         ###   ########.fr        #
+#    Updated: 2025/03/21 16:32:34 by okapshai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # NAME
-NAME = mutants
+NAME = mutantstack
 
 ##############
 # SRCS FILES #
@@ -37,9 +37,12 @@ INC_DIR				:=	includes/
 OBJS_DIR			:=	objs/
 OBJS				:=	$(SRCS:$(SRCS_DIR)%.cpp=$(OBJS_DIR)%.o)
 
+# DEPENDENCIES
+DEPS				:=	$(OBJS:$(OBJS_DIR)%.o=$(OBJS_DIR)%.d)
+
 # FLAGS
-CXX 				:= c++
-CXXFLAGS			:= -Wall -Wextra -Werror -std=c++98
+CXX 				:= 	c++
+CXXFLAGS			:= 	-Wall -Wextra -Werror -std=c++98
 INCFLAGS			:=	-I$(INC_DIR)
 
 # BASH FUNCTIONS
@@ -61,16 +64,20 @@ $(NAME): $(OBJS)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
 	@$(DIR_DUP) $(OBJS_DIR)
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -MP $(INCFLAGS) -c $< -o $@
+
+-include $(DEPS)
+	
 
 clean:
 	@echo 🧹 $(CYAN)"Removing .o files"$(WHITE)
-	${RM} $(OBJS)
+	${RM} $(OBJS) $(DEPS)
 
 fclean: clean
 	@echo 🧹 $(CYAN)"Removing all"$(WHITE)
 	${RM} $(NAME)
 	$(RM) $(OBJS_DIR)
+
 
 re: fclean all
 

@@ -6,45 +6,30 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:21:49 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/21 13:38:25 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:13:07 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
-Span::Span(): _maxSize(0) {
+Span::Span(): _maxSize(0) {}
 
-	std::cout << FGRN("Span Base Constructor called") << std::endl;
-}
+Span::Span( unsigned int N ): _maxSize(N) {}
 
-Span::Span( unsigned int N ): _maxSize(N) {
-    
-	std::cout << FGRN("Span Int Constructor called") << std::endl;	
-}
+Span::~Span() {}
 
-Span::~Span() {
-
-	std::cout << FYEL("Span Destructor called") << std::endl;
-}
-
-Span::Span( Span const & other ) {
-	
-    std::cout << FGRN("Span Copy Constructor called") << std::endl;
-	(*this ) = other;
-}
+Span::Span( Span const & other ) { (*this ) = other; }
 
 Span& Span::operator=( Span const & other ) {
 	
-    std::cout << FGRN("Span Assignment Aperator called") << std::endl;
-
-	if (this != &other) {
+    if (this != &other) {
 		this->_maxSize = other._maxSize;
 		this->_numbers = other._numbers;
 	}
 	return (*this);
 }
 
-// -------------------------------------------------------------------- Methods
+// boualem-------------------------------------------------------------------- Methods
 
 void Span::addNumber( int num ) { // Adding a Single Number
 	
