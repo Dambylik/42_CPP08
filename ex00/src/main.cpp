@@ -6,88 +6,41 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:42:08 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/18 19:17:21 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/21 12:14:28 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "EasyFind.hpp"
+#include "Colors.hpp"
 
-int main(void)
-{
-    std::vector<int> l;
-    std::vector<int>::iterator lol;
+int main() {
+    
+    std::vector<int> numbers;
+    numbers.push_back(1);
+    numbers.push_back(2);
+    numbers.push_back(3);
+    numbers.push_back(4);
+    numbers.push_back(5);
 
-    for (int i = 0; i < 100; i++) {
-        l.push_back(i);
+    std::cout << FYEL("Vector created: ");
+    for (size_t i = 0; i < numbers.size(); ++i) {
+        std::cout << numbers[i] << " ";
     }
-
-    //petit test sur vector de different type
-    std::vector<char> b;
-    std::vector<char>::iterator bol;
-
-    for (int i = 0; i < 10; i++) {
-        b.push_back('c');
-    }
+    std::cout << std::endl;
     
     try {
-        bol = easyfind(b, 2);
-        std::cout << "iterator: " << *bol << std::endl;
+        std::vector<int>::iterator it = easyfind(numbers, 3);
+        std::cout << FGRN("Element found in container: ") << *it << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
+        std::cout << FRED(e.what()) << std::endl;
     }
-
-	try {
-        bol = easyfind(b, 'c');
-        std::cout << "iterator: " << *bol << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
-    }
-    std::cout << "\n";
-
-    // fin petit test
-    
-    try {
-        lol = easyfind(l, 3);
-        std::cout << "iterator: " << *lol << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
-    }
-
-    std::cout << "\n";
 
     try {
-        lol = easyfind(l, -3);
-        std::cout << "iterator: " << *lol << std::endl;
+        std::vector<int>::iterator it = easyfind(numbers, 10);
+        std::cout << FGRN("Element found in container: ") << *it << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
-    }
-    
-    std::cout << "\n";
-
-    try {
-        lol = easyfind(l, 35);
-        std::cout << "iterator: " << *lol << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
+        std::cout << FRED(e.what()) << std::endl;
     }
 
-    std::cout << "\n";
-
-    try {
-        lol = easyfind(l, 100);
-        std::cout << "iterator: " << *lol << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
-    }
-
-    std::cout << "\n";
-
-    try {
-        lol = easyfind(l, 99);
-        std::cout << "iterator: " << *lol << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Can't find what you're looking for" << std::endl;
-    }
-
-    return (0);
+    return 0;
 }
