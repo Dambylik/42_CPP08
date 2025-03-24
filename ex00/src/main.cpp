@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:42:08 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/24 12:14:51 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:25:37 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main() {
 
-    std::cout << "--------------VECTOR--------------" << std::endl;
+    std::cout << std::endl << ITALIC("--------------VECTOR--------------") << std::endl << std::endl;
+    
     std::vector<int> numbers;
     numbers.push_back(1);
     numbers.push_back(2);
@@ -42,7 +43,8 @@ int main() {
         std::cout << FRED(e.what()) << std::endl;
     }
 
-    std::cout << std::endl << "--------------LIST--------------" << std::endl;
+    std::cout << std::endl << ITALIC("--------------LIST--------------") << std::endl << std::endl;
+    
     std::list<char> letters;
     letters.push_back('a');
     letters.push_back('b');
@@ -70,7 +72,8 @@ int main() {
         std::cout << FRED(e.what()) << std::endl;
     }
 
-    std::cout << std::endl << "--------------DEQUE--------------" << std::endl;
+    std::cout << std::endl << ITALIC("--------------DEQUE--------------") << std::endl << std::endl;
+
     std::deque<int> fnumbers;
     fnumbers.push_back(10);
     fnumbers.push_back(20);

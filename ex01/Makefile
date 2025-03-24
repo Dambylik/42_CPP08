@@ -6,7 +6,7 @@
 #    By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 17:02:11 by okapshai          #+#    #+#              #
-#    Updated: 2025/03/21 16:23:40 by okapshai         ###   ########.fr        #
+#    Updated: 2025/03/24 13:01:36 by okapshai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_DIR			:=	src/
 
 # SRCS VARIABLES
 SRCS_FILES 			:= \
+					Span.cpp\
 					main.cpp
 					
 SRCS				:=	$(addprefix $(SRCS_DIR), $(SRCS_FILES))

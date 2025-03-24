@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:21:49 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/21 15:13:07 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:12:25 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 Span::Span(): _maxSize(0) {}
 
 Span::Span( unsigned int N ): _maxSize(N) {}
-
-Span::~Span() {}
 
 Span::Span( Span const & other ) { (*this ) = other; }
 
@@ -29,36 +27,43 @@ Span& Span::operator=( Span const & other ) {
 	return (*this);
 }
 
-// boualem-------------------------------------------------------------------- Methods
-
-void Span::addNumber( int num ) { // Adding a Single Number
+std::ostream & operator<<(std::ostream & lhs, Span const & rhs) {
 	
-	if (this->_numbers.size() == this->_maxSize) // Checks if _numbers is full before adding.
-		throw Span::TooBigException(); // If full, throws TooBigException().
-	
-	this->_numbers.push_back(num); //Otherwise, appends the number to _numbers.
+	lhs << rhs.getMaxSize()<< std::endl;
+	return (lhs);
 }
 
-void Span::addRange( it start, it end ) { // Adding a Range of Numbers
+Span::~Span() {}
+
+//-------------------------------------------------------------------- Methods
+
+void Span::addNumber( int num ) {
 	
-	if (this->_numbers.size() + std::distance(start, end) > this->_maxSize) { // Uses std::distance(start, end) to check the number of elements in the range.
-		throw Span::TooBigException(); // If adding them exceeds _maxSize, it throws an exception.
+	if (this->_numbers.size() == this->_maxSize)
+		throw Span::TooBigException();
+	
+	this->_numbers.push_back(num);
+}
+
+void Span::addRange( it start, it end ) {
+	
+	if (this->_numbers.size() + std::distance(start, end) > this->_maxSize) {
+		throw Span::TooBigException();
 	}
-	this->_numbers.insert(this->_numbers.end(), start, end); // Otherwise, inserts elements into _numbers using std::vector::insert().	
+	this->_numbers.insert(this->_numbers.end(), start, end);
 }
 
-int	Span::shortestSpan() { // Finding the Shortest Span
+int	Span::shortestSpan() {
 	
-	if (this->_maxSize < 2 || this->_numbers.size() < 2) { // Throws an exception if there are fewer than 2 numbers.
-		
+	if (this->_maxSize < 2 || this->_numbers.size() < 2) {
 		throw Span::TooSmallException();
 	}
-	std::vector<int> copy(this->_numbers); //Creates a copy of _numbers and sorts it.
+	std::vector<int> copy(this->_numbers);
 	std::sort(copy.begin(), copy.end()); 
 	int span = *(copy.begin() + 1) - *(copy.begin());
 
 	for (it i = copy.begin(); i + 1 != copy.end(); i++) {
-		if ( *(i + 1) - *(i) < span) // Computes the smallest difference between consecutive elements.
+		if ( *(i + 1) - *(i) < span)
 			span = *(i + 1) - *(i);
 	}
 	return (span);
