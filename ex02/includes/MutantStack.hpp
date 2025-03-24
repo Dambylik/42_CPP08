@@ -15,15 +15,11 @@
 #include <iostream>
 #include <stack>
 #include <list>
+#include "Colors.hpp"
 
 template < typename T >
 
-// The goal of this exercise is to create a custom stack (MutantStack) that behaves 
-// like std::stack, but with iterators.
-// Normally, std::stack does not support iteration because it is designed as a Last-In-First-Out (LIFO) 
-// structure without direct element access except top().
-
-class MutantStack : public std::stack<T> { // We need to: Inherit from std::stack<T> to extend its functionality.
+class MutantStack : public std::stack< T > {
 
     public:
 
@@ -31,24 +27,18 @@ class MutantStack : public std::stack<T> { // We need to: Inherit from std::stac
         typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
         MutantStack() {};
-        MutantStack( const MutantStack& rhs ) { *this = rhs; }
-        MutantStack& operator=(const MutantStack& rhs) {
-            if (this != &rhs) {
-                std::stack<T>::operator=(rhs);
+        MutantStack( MutantStack const & other ) { (*this) = other; }
+        MutantStack & operator=( MutantStack const & other) {
+            if (this != &other) {
+                std::stack<T>::operator=(other);
             }
             return (*this);
         }
         ~MutantStack() {};
 
-// Add iterators to allow traversal of elements like a normal sequence container.
-// std::stack<T> itself does not provide iterators, but it is internally based on std::deque<T>.
-// We can expose begin() and end() using c (the internal container of std::stack).
-   
-        iterator begin() { 
-            return this->c.begin(); 
-        }
+        iterator        begin() { return this->c.begin(); }
+        iterator        end() { return this->c.end(); }
 
-        iterator end() { 
-            return this->c.end(); 
-        }
+        const_iterator  begin() const { return this->c.begin(); }
+        const_iterator  end() const { return this->c.end(); }
 };
