@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:54:50 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/24 11:41:51 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:11:20 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
+#include <deque>
 #include <list>
 #include <iostream>
 #include "NotFoundException.hpp"  
